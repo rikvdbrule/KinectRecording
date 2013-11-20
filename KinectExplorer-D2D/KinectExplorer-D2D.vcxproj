@@ -159,6 +159,7 @@
     <ClInclude Include="CameraColorSettingsViewer.h" />
     <ClInclude Include="CameraExposureSettingsViewer.h" />
     <ClInclude Include="CameraSettingsViewer.h" />
+    <ClInclude Include="RecordModeViewer.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="ImageRenderer.h" />
     <ClInclude Include="CustomDrawListControl.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="NuiStreamViewer.cpp" />
     <ClCompile Include="NuiTiltAngleViewer.cpp" />
     <ClCompile Include="NuiViewer.cpp" />
+    <ClCompile Include="RecordModeViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KinectExplorer.rc" />

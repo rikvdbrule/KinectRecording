@@ -16,6 +16,7 @@
 using namespace std;
 
 char SEPARATOR = ',';
+char TIMESEPARATOR = ':';
 
 void writeHeader(ofstream* filehandle);
 
@@ -197,7 +198,8 @@ void writeHeader(ofstream* filehandle)
 	*filehandle << "time" << SEPARATOR
 		<< "millisec" << SEPARATOR
 		<< "frame" << SEPARATOR
-		<< "Skeleton_trackState" << SEPARATOR;
+		<< "Skeleton_trackState" << SEPARATOR
+		<< "Skeleton_ID";
 	writeVector4Header(filehandle, "Skeleton");
 	writeBoneHeader(filehandle, "hip_center");
 	writeBoneHeader(filehandle, "spine");
@@ -249,7 +251,7 @@ void writeSkeletonData(const NUI_SKELETON_FRAME* frame, ofstream* skeleton_out)
 {
 	tm *timestamp = createTimeStamp();
 	DWORD millisecs = GetTickCount();
-	*skeleton_out << timestamp->tm_hour << ':' << timestamp->tm_min << ':' << timestamp->tm_sec << SEPARATOR
+	*skeleton_out << timestamp->tm_hour << TIMESEPARATOR << timestamp->tm_min << TIMESEPARATOR << timestamp->tm_sec << SEPARATOR
 		<< millisecs << SEPARATOR << frame->dwFrameNumber << SEPARATOR;
 	//loop through tracked skeletons
 	for(int i  = 0; i < NUI_SKELETON_COUNT; i +=1)

@@ -1,5 +1,6 @@
-#include "resource.h" 
+#include "stdafx.h"
 #include "RecordModeViewer.h"
+#include "resource.h" 
 
 RecordModeViewer::RecordModeViewer(const NuiViewer* pParent)
 	: NuiViewer(pParent)
@@ -14,13 +15,27 @@ RecordModeViewer::~RecordModeViewer(void)
 
 LRESULT RecordModeViewer::DialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    // Pass the message to default dialog procedure
-    return FALSE;
+   switch (uMsg)
+   {
+   case WM_INITDIALOG:
+	   OnInit(hWnd);
+	   break;
+
+   default:
+	   break;
+   }
+   
+   return FALSE;
 }
 
 UINT RecordModeViewer::GetDlgId()
 {
 	return IDD_RECORD_MODE_VIEW;
+}
+
+void RecordModeViewer::OnInit(HWND hWnd)
+{
+	HWND hWndButton = GetDlgItem(hWnd, IDC_RECORD_TOGGLE);
 }
 
 void RecordModeViewer::SetRecordMode(bool record, char* fileName)

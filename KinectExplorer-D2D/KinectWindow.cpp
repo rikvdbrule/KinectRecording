@@ -26,14 +26,16 @@
 #define TIMER_PERIOD                20
 
 // Titles of tab control items
+#define TAB_TITLE_RECORD			L"Record"
 #define TAB_TITLE_AUDIO             L"Audio"
 #define TAB_TITLE_ACCELEROMETER     L"Accelerometer"
 #define TAB_TITLE_TILTANGLE         L"Sensor Settings"
 
 // Index of tab control items
-#define TAB_INDEX_AUDIO             0
-#define TAB_INDEX_ACCELEROMETER     1
-#define TAB_INDEX_TILTANGLE         2
+#define TAB_INDEX_RECORD			0
+#define TAB_INDEX_AUDIO             1
+#define TAB_INDEX_ACCELEROMETER     2
+#define TAB_INDEX_TILTANGLE         3
 
 #define ERROR_MESSAGE_BUFFER_SIZE   1024
 
@@ -94,6 +96,7 @@ KinectWindow::KinectWindow(HINSTANCE hInstance, HWND hWndParent, INuiSensor* pNu
     m_settingViews.push_back(m_pExposureSettingsView);
 
     // Group tabbed sub views together
+	m_tabbedViews.push_back((m_pRecordModeView));
     m_tabbedViews.push_back((m_pAudioView));
     m_tabbedViews.push_back((m_pAccelView));
     m_tabbedViews.push_back((m_pTiltAngleView));
@@ -468,7 +471,8 @@ bool KinectWindow::CreateTabControl()
             tci.mask        = TCIF_TEXT;
             tci.iImage      = -1;
 
-            InsertTabItem(TAB_TITLE_AUDIO,          TAB_INDEX_AUDIO);
+            InsertTabItem(TAB_TITLE_RECORD,			TAB_INDEX_RECORD);
+			InsertTabItem(TAB_TITLE_AUDIO,          TAB_INDEX_AUDIO);
             InsertTabItem(TAB_TITLE_ACCELEROMETER,  TAB_INDEX_ACCELEROMETER);
             InsertTabItem(TAB_TITLE_TILTANGLE,      TAB_INDEX_TILTANGLE);
         }
@@ -583,6 +587,7 @@ void KinectWindow::CleanUp()
     SafeDelete(m_pAccelerometerStream);
     SafeDelete(m_pPrimaryView);
     SafeDelete(m_pSecondaryView);
+	SafeDelete(m_pRecordModeView);
     SafeDelete(m_pAudioView);
     SafeDelete(m_pAccelView);
     SafeDelete(m_pTiltAngleView);

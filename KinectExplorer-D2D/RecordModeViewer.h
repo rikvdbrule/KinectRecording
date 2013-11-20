@@ -21,6 +21,8 @@ private:
 
     virtual LRESULT DialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+	void OnInit(HWND hWnd);
+
 private:
 	bool m_record;
 	char * m_fileName;

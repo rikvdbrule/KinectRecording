@@ -30,10 +30,10 @@ NuiSkeletonStream::NuiSkeletonStream(INuiSensor* pNuiSensor, char* filename)
     , m_chooserMode(ChooserModeDefault)
     , m_pSecondStreamViewer(nullptr)
 	, skeleton_out(filename)
+	, m_record(false)
 {
     m_stickyIDs[FirstTrackID] = 0;
     m_stickyIDs[SecondTrackID] = 0;
-	writeHeader(&skeleton_out);
 }
 
 /// <summary>
@@ -77,6 +77,14 @@ void NuiSkeletonStream::SetSeatedMode(bool seated)
     }
 }
 
+void NuiSkeletonStream::SetRecordMode(bool record)
+{
+	if (record != m_record)
+	{
+		m_record = record;
+		StartStream();
+	}
+}
 /// <summary>
 /// Set chooser mode
 /// </summary>
@@ -121,6 +129,10 @@ HRESULT NuiSkeletonStream::StartStream()
                 | (ChooserModeDefault != m_chooserMode ? NUI_SKELETON_TRACKING_FLAG_TITLE_SETS_TRACKED_SKELETONS : 0);
             return m_pNuiSensor->NuiSkeletonTrackingEnable(GetFrameReadyEvent(), flags);
         }
+		if (m_record)
+		{
+			writeHeader(&skeleton_out);
+		}
     }
 
     return E_FAIL;
@@ -280,8 +292,14 @@ void NuiSkeletonStream::ProcessSkeleton()
 
     // Set skeleton data to stream viewers
     AssignSkeletonFrameToStreamViewers(&m_skeletonFrame);
-	writeSkeletonData(&m_skeletonFrame, &skeleton_out);
-    UpdateTrackedSkeletons();
+	
+	//record skeleton data
+	if(m_record)
+	{
+		writeSkeletonData(&m_skeletonFrame, &skeleton_out);
+	}
+
+	UpdateTrackedSkeletons();
 }
 
 /// <summary>

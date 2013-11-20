@@ -155,6 +155,8 @@ private:
     /// <param name="pFrame">The pointer to skeleton frame</param>
     void AssignSkeletonFrameToStreamViewers(const NUI_SKELETON_FRAME* pFrame);
 
+	void SetRecordMode(bool record);
+
 private:
     bool                m_near;
     bool                m_seated;
@@ -163,6 +165,6 @@ private:
     NUI_SKELETON_FRAME  m_skeletonFrame;
     NuiStreamViewer*    m_pSecondStreamViewer;
 	std::ofstream		skeleton_out;
-
+	bool				m_record;
     std::map<int, NuiActivityWatcher*> m_activityWatchers;
 };

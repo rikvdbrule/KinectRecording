@@ -21,7 +21,7 @@ std::string CreateDateTimeStamp()
 
 std::string GenerateSkeletonOutputFileName()
 {
-	const std::string prefix = "../skeleton_out_";
+	const std::string prefix = "skeleton_out_";
 	const std::string affix = ".data";
 	return prefix + CreateDateTimeStamp() + affix;
 }

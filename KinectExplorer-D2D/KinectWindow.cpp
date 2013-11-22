@@ -4,6 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+#include <string.h>
 #include "stdafx.h"
 #include "KinectWindow.h"
 #include "NuiStreamViewer.h"
@@ -12,6 +13,7 @@
 #include "resource.h"
 #include "CameraColorSettingsViewer.h"
 #include "CameraExposureSettingsViewer.h"
+#include "RecordFunctions.h"
 
 // Window size definations
 #define PRIMARY_VIEW_MIN_WIDTH      480
@@ -101,10 +103,13 @@ KinectWindow::KinectWindow(HINSTANCE hInstance, HWND hWndParent, INuiSensor* pNu
     m_tabbedViews.push_back((m_pAccelView));
     m_tabbedViews.push_back((m_pTiltAngleView));
 
+	// Create output file name
+	std::string fileName = GenerateSkeletonOutputFileName();
+
     // Create stream objects
     m_pColorStream         = new NuiColorStream(m_pNuiSensor);
     m_pDepthStream         = new NuiDepthStream(m_pNuiSensor);
-    m_pSkeletonStream      = new NuiSkeletonStream(m_pNuiSensor, "../skeleton_out.data"); //TODO:filename
+    m_pSkeletonStream      = new NuiSkeletonStream(m_pNuiSensor, fileName);
     m_pAudioStream         = new NuiAudioStream(m_pNuiSensor);
     m_pAccelerometerStream = new NuiAccelerometerStream(m_pNuiSensor);
 

@@ -23,7 +23,7 @@ public:
 public:
     /// <summary>
     /// Create window of viewer
-    /// </sumarry>
+    /// </summary>
     /// <returns>Indicates success or failure</returns>
     virtual bool CreateView();
 

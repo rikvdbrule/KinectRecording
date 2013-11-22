@@ -39,7 +39,7 @@ public:
     /// Constructor
     /// <summary>
     /// <param name="pNuiSensor">The pointer to NUI sensor device instance</param>
-    NuiSkeletonStream(INuiSensor* pNuiSensor, char * filename);
+    NuiSkeletonStream(INuiSensor* pNuiSensor, std::string filename);
 
     /// <summary>
     /// Destructor

@@ -7,11 +7,10 @@
 #include "stdafx.h"
 #include "NuiSkeletonStream.h"
 #include "NuiStreamViewer.h"
-//#include "SkeletonOutput.h"
+#include "RecordFunctions.h"
 
 #include <iostream>
 #include <fstream>
-#include <ctime>
 
 using namespace std;
 
@@ -22,16 +21,17 @@ void writeHeader(ofstream* filehandle);
 
 /// <summary>
 /// Constructor
-/// <summary>
+/// </summary>
 /// <param name="pNuiSensor">The pointer to NUI sensor device instance</param>
-NuiSkeletonStream::NuiSkeletonStream(INuiSensor* pNuiSensor, char* filename)
+/// <param name="filename">The Filename to write the skeletondata to</param>
+NuiSkeletonStream::NuiSkeletonStream(INuiSensor* pNuiSensor, std::string filename)
     : NuiStream(pNuiSensor)
     , m_near(false)
     , m_seated(false)
     , m_chooserMode(ChooserModeDefault)
     , m_pSecondStreamViewer(nullptr)
 	, skeleton_out(filename)
-	, m_record(false)
+	, m_record(true)
 {
     m_stickyIDs[FirstTrackID] = 0;
     m_stickyIDs[SecondTrackID] = 0;
@@ -115,7 +115,11 @@ HRESULT NuiSkeletonStream::StartStream()
 {
     if (HasSkeletalEngine(m_pNuiSensor))
     {
-        if (m_paused)
+        if (m_record)
+		{
+			writeHeader(&skeleton_out);
+		}
+		if (m_paused)
         {
             // Clear skeleton data in stream viewers
             AssignSkeletonFrameToStreamViewers(nullptr);
@@ -130,10 +134,6 @@ HRESULT NuiSkeletonStream::StartStream()
                 | (ChooserModeDefault != m_chooserMode ? NUI_SKELETON_TRACKING_FLAG_TITLE_SETS_TRACKED_SKELETONS : 0);
             return m_pNuiSensor->NuiSkeletonTrackingEnable(GetFrameReadyEvent(), flags);
         }
-		if (m_record)
-		{
-			writeHeader(&skeleton_out);
-		}
     }
 
     return E_FAIL;
@@ -162,13 +162,6 @@ void NuiSkeletonStream::ProcessStreamFrame()
         // if we have received any valid new depth data we may need to draw
         ProcessSkeleton();
     }
-}
-
-
-tm* createTimeStamp()
-{
-	time_t now = time(0);
-	return localtime(&now);
 }
 
 void writeVector4Header(ofstream* filehandle, char* name)
@@ -249,7 +242,7 @@ void writeSkeletonJointsToFile(ofstream* filehandle, const _NUI_SKELETON_DATA da
 
 void writeSkeletonData(const NUI_SKELETON_FRAME* frame, ofstream* skeleton_out)
 {
-	tm *timestamp = createTimeStamp();
+	tm *timestamp = CreateTimeStruct();
 	DWORD millisecs = GetTickCount();
 	*skeleton_out << timestamp->tm_hour << TIMESEPARATOR << timestamp->tm_min << TIMESEPARATOR << timestamp->tm_sec << SEPARATOR
 		<< millisecs << SEPARATOR << frame->dwFrameNumber << SEPARATOR;

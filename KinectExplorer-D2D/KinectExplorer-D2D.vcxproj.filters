@@ -23,7 +23,6 @@
     <ClCompile Include="NuiStreamViewer.cpp" />
     <ClCompile Include="NuiTiltAngleViewer.cpp" />
     <ClCompile Include="NuiViewer.cpp" />
-    <ClCompile Include="RecordModeViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraColorSettingsViewer.h" />
@@ -52,7 +51,6 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="StaticMediaBuffer.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="RecordModeViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KinectExplorer.rc" />

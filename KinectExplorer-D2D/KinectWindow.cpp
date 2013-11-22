@@ -76,7 +76,6 @@ KinectWindow::KinectWindow(HINSTANCE hInstance, HWND hWndParent, INuiSensor* pNu
     m_pSecondaryView  = new NuiStreamViewer(this);
     m_pAudioView      = new NuiAudioViewer(this);
     m_pAccelView      = new NuiAccelerometerViewer(this);
-	m_pRecordModeView  = new RecordModeViewer(this);
     m_pTiltAngleView  = new NuiTiltAngleViewer(this, pNuiSensor);
     m_pCurTabbedView  = nullptr;
     m_pColorSettingsView = new CameraColorSettingsViewer(this);
@@ -84,7 +83,6 @@ KinectWindow::KinectWindow(HINSTANCE hInstance, HWND hWndParent, INuiSensor* pNu
 
     m_views.push_back(m_pPrimaryView);
     m_views.push_back(m_pSecondaryView);
-	//m_views.push_back(m_pRecordModeView);
     m_views.push_back(m_pAudioView);
     m_views.push_back(m_pAccelView);
     m_views.push_back(m_pTiltAngleView);

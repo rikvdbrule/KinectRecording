@@ -15,7 +15,6 @@
 #include "NuiAccelerometerStream.h"
 #include "NuiTiltAngleViewer.h"
 #include "KinectSettings.h"
-#include "RecordModeViewer.h"
 
 class KinectWindow : public NuiViewer
 {
@@ -258,8 +257,7 @@ private:
     NuiStreamViewer*        m_pSecondaryView;           // Pointer to secondary viewer
     NuiAudioViewer*         m_pAudioView;               // Pointer to audio viewer
     NuiAccelerometerViewer* m_pAccelView;               // Pointer to accelerometer viewer
-    RecordModeViewer*		m_pRecordModeView;			// Pointer to Record Mode Viewer
-	NuiTiltAngleViewer*     m_pTiltAngleView;           // Pointer to tilt angle viewer
+    NuiTiltAngleViewer*     m_pTiltAngleView;           // Pointer to tilt angle viewer
     NuiViewer*              m_pCurTabbedView;           // Pointer to tabbed viewer currently visible
 
     CameraSettingsViewer*   m_pColorSettingsView;       // Pointer to camera color settings viewer

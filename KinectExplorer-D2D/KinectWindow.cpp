@@ -96,7 +96,6 @@ KinectWindow::KinectWindow(HINSTANCE hInstance, HWND hWndParent, INuiSensor* pNu
     m_settingViews.push_back(m_pExposureSettingsView);
 
     // Group tabbed sub views together
-	m_tabbedViews.push_back((m_pRecordModeView));
     m_tabbedViews.push_back((m_pAudioView));
     m_tabbedViews.push_back((m_pAccelView));
     m_tabbedViews.push_back((m_pTiltAngleView));
@@ -590,7 +589,6 @@ void KinectWindow::CleanUp()
     SafeDelete(m_pAccelerometerStream);
     SafeDelete(m_pPrimaryView);
     SafeDelete(m_pSecondaryView);
-	SafeDelete(m_pRecordModeView);
     SafeDelete(m_pAudioView);
     SafeDelete(m_pAccelView);
     SafeDelete(m_pTiltAngleView);

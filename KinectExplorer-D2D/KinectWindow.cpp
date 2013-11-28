@@ -78,6 +78,7 @@ KinectWindow::KinectWindow(HINSTANCE hInstance, HWND hWndParent, INuiSensor* pNu
     // Create instances of sub views
     m_pPrimaryView    = new NuiStreamViewer(this);
     m_pSecondaryView  = new NuiStreamViewer(this);
+	m_pRecordView	  = new RecordModeView(this);
     m_pAudioView      = new NuiAudioViewer(this);
     m_pAccelView      = new NuiAccelerometerViewer(this);
     m_pTiltAngleView  = new NuiTiltAngleViewer(this, pNuiSensor);
@@ -87,6 +88,7 @@ KinectWindow::KinectWindow(HINSTANCE hInstance, HWND hWndParent, INuiSensor* pNu
 
     m_views.push_back(m_pPrimaryView);
     m_views.push_back(m_pSecondaryView);
+	m_views.push_back(m_pRecordView);
     m_views.push_back(m_pAudioView);
     m_views.push_back(m_pAccelView);
     m_views.push_back(m_pTiltAngleView);
@@ -96,6 +98,7 @@ KinectWindow::KinectWindow(HINSTANCE hInstance, HWND hWndParent, INuiSensor* pNu
     m_settingViews.push_back(m_pExposureSettingsView);
 
     // Group tabbed sub views together
+	m_tabbedViews.push_back((m_pRecordView));
     m_tabbedViews.push_back((m_pAudioView));
     m_tabbedViews.push_back((m_pAccelView));
     m_tabbedViews.push_back((m_pTiltAngleView));
